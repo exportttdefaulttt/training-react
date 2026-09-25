@@ -1,0 +1,32 @@
+.add-employee {
+    padding: 24px;
+
+    border-radius: 24px;
+
+              background: var(--surface);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid var(--border);
+
+}
+
+.section-header {
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+}
+
+.section-header p {
+    margin-top: 8px;
+
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .add-employee {
+        padding: 20px;
+    }
+}

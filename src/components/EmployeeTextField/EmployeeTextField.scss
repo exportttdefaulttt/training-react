@@ -1,0 +1,69 @@
+.text-field {
+    display: grid;
+    grid-template-rows:
+        auto
+        auto
+        18px;
+    row-gap: 4px;
+}
+
+.text-field label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    justify-self: start;
+}
+
+.text-field input {
+    width: 100%;
+
+    padding: 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: var(--text);
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.text-field input:focus {
+    outline: none;
+
+    border-color: var(--primary);
+
+    background: rgba(255,255,255,.06);
+}
+
+.field-error {
+    font-size: 0.8rem;
+
+    color: var(--danger);
+}
+
+.input-error {
+    border-color: var(--danger) !important;
+}
+
+.text-field input[readonly] {
+    cursor: default;
+
+    color: var(--text-secondary);
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border-style: dashed;
+}
+
+input[type='number'] {
+    appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}

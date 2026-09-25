@@ -1,0 +1,54 @@
+.filters {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.filters button {
+    padding: 12px 18px;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+
+    cursor: pointer;
+
+    transition:
+        background-color .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+.filters button:hover {
+    border-color: var(--primary);
+
+    color: var(--text);
+}
+
+.filters button.active {
+    border-color: var(--primary);
+
+    background: var(--primary);
+
+    color: white;
+}
+
+@media (max-width: 600px) {
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters button {
+        width: 100%;
+    }
+}

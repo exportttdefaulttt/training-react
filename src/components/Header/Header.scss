@@ -1,0 +1,157 @@
+// .header {
+//     display: flex;
+//     justify-content: space-between;
+
+//     gap: 40px;
+
+//     padding: 40px;
+
+//     border-radius: 28px;
+
+//     background: linear-gradient(
+//         135deg,
+//         rgba(139, 92, 246, 0.18),
+//         rgba(15, 23, 42, 0.8)
+//     );
+
+//     backdrop-filter: blur(20px);
+
+//     border: 1px solid var(--border);
+// }
+
+// .header__left {
+//     flex: 1;
+// }
+
+// .header__right {
+//     display: flex;
+//     align-items: center;
+
+//     flex-shrink: 0;
+// }
+
+// .header__subtitle {
+//     color: var(--text-secondary);
+
+//     text-transform: uppercase;
+
+//     letter-spacing: 2px;
+
+//     font-size: 0.8rem;
+// }
+
+// .header__title {
+//     margin-top: 8px;
+
+//     font-size: 2.2rem;
+// }
+
+// .header__description {
+//     margin-top: 12px;
+
+//     max-width: 500px;
+
+//     color: var(--text-secondary);
+
+//     line-height: 1.6;
+// }
+
+// @media (max-width: 992px) {
+//     .header {
+//         flex-direction: column;
+//     }
+
+//     .header__right {
+//         justify-content: center;
+//     }
+// }
+
+// @media (max-width: 576px) {
+//     .header {
+//         padding: 24px;
+//         gap: 24px;
+//     }
+
+//     .header__title {
+//         font-size: 1.8rem;
+//     }
+
+//     .header__description {
+//         max-width: 100%;
+//     }
+// }
+
+.header {
+    padding: 40px;
+
+    border-radius: 28px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(139, 92, 246, 0.18),
+        rgba(15, 23, 42, 0.8)
+    );
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid var(--border);
+}
+
+
+.header__subtitle {
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    font-size: 0.8rem;
+}
+
+.header__title {
+    margin-top: 8px;
+
+    font-size: 2.2rem;
+}
+
+.header__description {
+    margin-top: 12px;
+
+    max-width: 500px;
+
+    color: var(--text-secondary);
+
+    line-height: 1.6;
+}
+
+.header__bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+}
+
+.statistics {
+    flex-grow: 1;
+    flex-basis: 600px;
+}
+
+@media (max-width: 992px) {
+
+}
+
+@media (max-width: 576px) {
+    .header {
+        padding: 24px;
+    }
+
+    .header__title {
+        font-size: 1.8rem;
+    }
+
+    .header__description {
+        max-width: 100%;
+    }
+}

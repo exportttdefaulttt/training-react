@@ -1,0 +1,36 @@
+@use "@/styles/fonts";
+@use "@/styles/variables";
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    min-height: 100vh;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 20px;
+    @media (max-width: 768px) {
+        padding: 12px;
+    }
+    @media (max-width: 480px) {
+        padding: 8px;
+    }
+}

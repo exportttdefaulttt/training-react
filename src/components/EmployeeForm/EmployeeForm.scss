@@ -1,0 +1,64 @@
+.employee-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+
+    column-gap: 32px;
+    row-gap: 16px;
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
+}
+
+.form-reset-btn,
+.form-submit-btn {
+    padding: 16px 24px;
+
+    border-radius: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.form-reset-btn {
+    border: 1px solid var(--border);
+
+    background: rgba(255,255,255,.04);
+
+    color: var(--text-secondary);
+}
+
+.form-reset-btn:hover {
+    background: rgba(255,255,255,.08);
+
+    color: var(--text);
+}
+
+.form-submit-btn {
+    border: none;
+
+    background: var(--primary);
+
+    color: white;
+}
+
+.form-submit-btn:hover {
+    background: var(--primary-hover);
+}

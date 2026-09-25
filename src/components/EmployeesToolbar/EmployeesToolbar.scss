@@ -1,0 +1,23 @@
+.employee-filter {
+    padding: 24px;
+
+    border-radius: 24px;
+
+    background: var(--surface);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid var(--border);
+}
+
+.employee-filter__title {
+    margin-bottom: 16px;
+
+    font-size: 1.4rem;
+}
+
+@media (max-width: 600px) {
+    .employee-filter {
+        padding: 20px;
+    }
+}
