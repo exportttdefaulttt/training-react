@@ -1,29 +1,32 @@
+import { memo } from 'react';
 import { Award, CalendarDays, History, Mail, Pencil, Star, Trash2 } from 'lucide-react';
 import clsx from 'clsx';
+import { formatMoney } from '@/utils/formatMoney';
+
+import type { Employee, EmployeeId } from '@/shared/employee';
+import type { ToggleEmployeePayload } from '@/store/slices/employeesSlice';
 
 import './EmployeeCard.scss';
 
-interface Props {
-    firstName: string;
-    lastName: string;
-    email: string;
-    position: string;
-    salary: number;
-    isBonus: boolean;
-    isImportant: boolean;
-    createdAt: string;
-    updatedAt?: string;
-}
+interface Props extends Employee {
+    onRemove: (id: EmployeeId) => void;
+    onToggle: (payload: ToggleEmployeePayload) => void;
+    onOpenModal: (id: EmployeeId) => void;
+};
 
-const EmployeeCard = ({ 
-    firstName, lastName, email, position, salary, 
-    isBonus, isImportant, createdAt, updatedAt
+const EmployeeCard = memo(({ 
+    id, firstName, lastName, email, position, salary, isBonus, 
+    isImportant, createdAt, updatedAt, onRemove, onToggle, onOpenModal
 }: Props) => {
+
+    const articleClasses = clsx('employee-card', isBonus && 'employee-card--bonus', isImportant && 'employee-card--important');
 
     const initials = `${firstName[0]}${lastName[0]}`;
 
+    const formatedSalary = formatMoney(salary);
+
     return (
-        <article className={clsx('employee-card', isBonus && 'employee-card--bonus', isImportant && 'employee-card--important')}>
+        <article className={articleClasses}>
 
             <div className="employee-main">
 
@@ -83,27 +86,27 @@ const EmployeeCard = ({
                         Зарплата
                     </span>
                     <span className="salary-value">
-                        {salary.toLocaleString('ru-RU')} ₽
+                        {formatedSalary}
                     </span>
                 </div>
 
                 <div className="employee-actions">
-                    <button type="button" className="reward" aria-label="Выдать премию">
+                    <button onClick={() => onToggle({ id, prop: 'isBonus' })} type="button" className="reward" aria-label="Выдать премию">
                         <Award size={18} />
                     </button>
-                    <button type="button" className="star" aria-label="Важный сотрудник">
+                    <button onClick={() => onToggle({ id, prop: 'isImportant' })} type="button" className="star" aria-label="Важный сотрудник">
                         <Star size={18} />
                     </button>
-                    <button type="button" className="edit" aria-label="Редактировать">
+                    <button onClick={() => onOpenModal(id)} type="button" className="edit" aria-label="Редактировать">
                         <Pencil size={18} />
                     </button>
-                    <button type="button" className="delete" aria-label="Удалить">
+                    <button onClick={() => onRemove(id)} type="button" className="delete" aria-label="Удалить">
                         <Trash2 size={18} />
                     </button>
                 </div>
             </div>
         </article>
     );
-};
+});
 
 export default EmployeeCard;

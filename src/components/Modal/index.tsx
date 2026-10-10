@@ -6,10 +6,11 @@ import './Modal.scss';
 
 interface ModalProps {
     title: string;
+    onClose: () => void;
     children: React.ReactNode;
 }
 
-const Modal = ({ title, children }: ModalProps) => {
+const Modal = ({ title, children, onClose }: ModalProps) => {
 
     useLayoutEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -20,7 +21,7 @@ const Modal = ({ title, children }: ModalProps) => {
     }, []);
 
     return createPortal(
-        <div className="modal">
+        <div className="modal" onClick={onClose}>
             <div
                 className="modal-content"
                 onClick={(e) => e.stopPropagation()}
@@ -29,6 +30,7 @@ const Modal = ({ title, children }: ModalProps) => {
                     <h2>{title}</h2>
 
                     <button
+                        onClick={onClose}
                         type="button"
                         className="modal-close"
                     >

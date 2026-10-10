@@ -6,10 +6,10 @@ interface EmployeeTextFieldProps {
     label: string;
     name: string;
     type: HTMLInputTypeAttribute;
-    value?: string;
-    error?: string | null;
+    value: string;
+    error: string | undefined;
     readOnly?: boolean;
-    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const EmployeeTextField = ({ label, name, type, value, error, readOnly, onChange }: EmployeeTextFieldProps) => {

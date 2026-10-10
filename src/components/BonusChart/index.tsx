@@ -2,7 +2,7 @@ import './BonusChart.scss';
 
 const BonusChart = () => {
 
-    const percentage = 0;
+    const percentage = 100;
 
     const radius = 70;
     const circumference = 2 * Math.PI * radius;

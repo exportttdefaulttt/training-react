@@ -1,16 +1,13 @@
-import { STATISTICS_CARDS, type Statistics as StatisticsConfig } from '@/shared/statistics';
+import { useAppSelector } from '@/store/hooks';
+import { selectStatistics } from '@/store/slices/employeesSlice';
+import { STATISTICS_CARDS } from '@/shared/statistics';
 import StatisticsCard from '@/components/StatisticsCard';
 
 import './Statistics.scss';
 
 const Statistics = () => {
 
-    const statistics: StatisticsConfig = {
-        totalEmployees: 5,
-        totalImportantEmployees: 2,
-        payrollFund: 250000,
-        averageSalary: 0,
-    };
+    const statistics = useAppSelector(selectStatistics);
 
     return (
         <div className="statistics">

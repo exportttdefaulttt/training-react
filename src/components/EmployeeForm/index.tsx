@@ -1,18 +1,68 @@
+import { useState, type ChangeEvent, type SubmitEvent } from 'react';
+import * as yup from 'yup';
 import { EMPLOYEE_FORM_FIELDS } from '@/shared/employeeFormFields';
-
+import type { EmployeeFormFields, EmployeeFormFieldsErrors } from '@/shared/employee';
 import EmployeeTextField from '@/components/EmployeeTextField';
-
+import { employeeFormSchema } from '@/utils/employeeFormSchema';
+import { getEmployeeFormErrors } from '@/utils/getEmployeeFormErrors';
 import './EmployeeForm.scss';
 
 interface EmployeeFormProps {
     submitText: string;
     resetText: string;
+    onSubmit: (employeeForm: EmployeeFormFields) => void;
+    initialValues?: EmployeeFormFields;
+    readOnlyFields?: (keyof EmployeeFormFields)[];
 }
 
-const EmployeeForm = ({ submitText, resetText }: EmployeeFormProps) => {
+const EmployeeForm = ({ submitText, resetText, initialValues, readOnlyFields, onSubmit }: EmployeeFormProps) => {
+
+    const [employeeForm, setEmployeeForm] = useState<EmployeeFormFields>({
+        firstName: initialValues?.firstName ?? '',
+        lastName: initialValues?.lastName ?? '',
+        email: initialValues?.email ?? '',
+        position: initialValues?.position ?? '',
+        salary: initialValues?.salary ?? '',
+    });
+
+    const [employeeFormErrors, setEmployeeFormErrors] = useState<EmployeeFormFieldsErrors>({});
+
+    const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+
+        setEmployeeForm(employeeForm => ({ ...employeeForm, [name]: value }));
+    };
+
+    const onHandleReset = () => {
+        setEmployeeForm({
+            firstName: initialValues?.firstName ?? '',
+            lastName: initialValues?.lastName ?? '',
+            email: initialValues?.email ?? '',
+            position: initialValues?.position ?? '',
+            salary: initialValues?.salary ?? '',
+        });
+    };
+
+    const onHandleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        try {
+            employeeFormSchema.validateSync(employeeForm, { abortEarly: false });
+            setEmployeeFormErrors({})
+            onHandleReset();
+            onSubmit(employeeForm);
+        } catch(error) {
+            if (error instanceof yup.ValidationError) {
+                setEmployeeFormErrors(getEmployeeFormErrors(error));
+                return;
+            }
+
+            throw error;
+        }
+    }
 
     return (
-        <form className="employee-form">
+        <form onSubmit={onHandleSubmit} className="employee-form">
             {
                 EMPLOYEE_FORM_FIELDS.map(field => (
                     <EmployeeTextField
@@ -20,15 +70,15 @@ const EmployeeForm = ({ submitText, resetText }: EmployeeFormProps) => {
                         label={field.label}
                         name={field.name}
                         type={field.type}
-                        // value={employeeForm[field.name]}
-                        // error={errors[field.name]}
-                        // readOnly={readOnlyFields?.includes(field.name)}
-                        // onChange={onHandleChange}
+                        value={employeeForm[field.name]}
+                        error={employeeFormErrors[field.name]}
+                        readOnly={readOnlyFields?.includes(field.name)}
+                        onChange={onHandleChange}
                     />
                 ))
             }
             <div className="form-actions">
-                <button type="button" className="form-reset-btn">
+                <button type="button" className="form-reset-btn" onClick={onHandleReset}>
                     {resetText}
                 </button>
                 <button type="submit" className="form-submit-btn">

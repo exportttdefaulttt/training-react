@@ -1,6 +1,7 @@
 import type { HTMLInputTypeAttribute } from 'react';
+import type { Employee } from './employee';
 
-type EmployeeFormFields = 'firstName' | 'lastName' | 'email' | 'position' | 'salary';
+type EmployeeFormFields = Extract<keyof Employee, 'firstName' | 'lastName' | 'email' | 'position' | 'salary'>;
 
 type EmployeeFormFieldConfig = {
     name: EmployeeFormFields;
