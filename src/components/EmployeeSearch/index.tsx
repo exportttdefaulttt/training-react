@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAppDispatch } from '@/store/hooks';
+import { changeQuery } from '@/store/slices/filtersSlice';
 import { Search, X } from 'lucide-react';
 
 import './EmployeeSearch.scss';
@@ -6,6 +8,18 @@ import './EmployeeSearch.scss';
 const EmployeeSearch = () => {
 
     const [value, setValue] = useState('');
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            dispatch(changeQuery(value));
+        }, 1500);
+
+        return () => {
+            clearTimeout(timeoutId);
+        }
+    }, [dispatch, value]);
 
     return (
         <div className="search-box">

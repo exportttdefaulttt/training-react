@@ -33,7 +33,8 @@ const employeesSlice = createSlice({
 
 export const {
 	selectAll: selectAllEmployees,
-	selectById: selectEmployeeById
+	selectById: selectEmployeeById,
+	selectTotal: selectTotalAllEmployees
 } = employeesAdapter.getSelectors<RootState>(state => state.employees);
 
 export const selectStatistics = createAppSelector(
@@ -49,6 +50,24 @@ export const selectStatistics = createAppSelector(
 
 		return { totalEmployees, totalImportantEmployees, payrollFund, averageSalary };
 	}
+);
+
+export const selectTotalBonusEmployees = createAppSelector(
+	[selectAllEmployees],
+	(employees) => {
+		return employees.length && employees.filter(employee => employee.isBonus).length;
+	}
+);
+
+export const selectBonusEmployeesPercentage = createAppSelector(
+    [selectAllEmployees, selectTotalBonusEmployees],
+    (employees, bonusEmployees) => {
+        if (employees.length === 0) {
+            return 0;
+        }
+
+        return Math.round((bonusEmployees / employees.length) * 100);
+    },
 );
 
 export const { 

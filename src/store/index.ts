@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { employeesReducer } from '@/store/reducers';
+import { employeesReducer, filtersReducer } from '@/store/reducers';
 
 export const store = configureStore({
     reducer: {
         employees: employeesReducer,
+        filters: filtersReducer,
     },
 });
 

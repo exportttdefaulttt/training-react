@@ -30,14 +30,14 @@ export type EmployeeBooleanKeys = BooleanKeys<Employee>;
 export const EMPLOYEES: Employee[] = [
     { 
         id: '1', firstName: 'Леонид', lastName: 'Филоненко', email: 'leonid@gmail.com', position: 'Программист', 
-        salary: 60000, isBonus: true, isImportant: false, createdAt: '17.07.2026',
+        salary: 60000, isBonus: true, isImportant: false, createdAt: new Date().toISOString(),
     },
     { 
         id: '2', firstName: 'Никита', lastName: 'Николаев', email: 'nikita.n@mail.ru', position: 'Дизайнер', 
-        salary: 45000, isBonus: false, isImportant: true, createdAt: '17.07.2026',
+        salary: 45000, isBonus: false, isImportant: true, createdAt: new Date().toISOString(),
     },
     { 
         id: '3', firstName: 'Амат', lastName: 'Муразян', email: 'amatinho@gmail.com', position: 'Экономист', 
-        salary: 50000, isBonus: false, isImportant: false, createdAt: '17.07.2026', updatedAt: '17.07.2026',
+        salary: 50000, isBonus: false, isImportant: false, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
     },
 ];

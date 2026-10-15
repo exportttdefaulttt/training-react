@@ -1,7 +1,9 @@
+import { useToast } from '@/hooks/useToast';
 import { useState } from 'react';
 import { useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
-import { selectAllEmployees, removeEmployee, toggleEmployee, type ToggleEmployeePayload } from '@/store/slices/employeesSlice';
+import { selectTotalAllEmployees, removeEmployee, toggleEmployee, type ToggleEmployeePayload } from '@/store/slices/employeesSlice';
+import { selectSortedEmployees } from '@/store/selectors';
 import type { EmployeeId } from '@/shared/employee';
 import EmptyListEmployees from '@/components/EmptyListEmployees';
 import EmployeeCard from '@/components/EmployeeCard';
@@ -11,15 +13,23 @@ import './EmployeesList.scss';
 
 const EmployeesList = () => {
 
+    const { showToast } = useToast();
+
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [selectedId, setSelectedId] = useState<EmployeeId>('');
 
-    const employees = useAppSelector(selectAllEmployees);
+    const employees = useAppSelector(selectSortedEmployees);
+    const totalEmployees = useAppSelector(selectTotalAllEmployees);
 
     const dispatch = useAppDispatch();
 
     const onRemove = useCallback((id: EmployeeId) => {
         dispatch(removeEmployee(id));
+        showToast(
+            'Сотрудник успешно удален',
+            `Сотрудник с id-${id} удален.`,
+            'error'
+        );
     }, [dispatch]);
 
     const onToggle = useCallback((payload: ToggleEmployeePayload) => {
@@ -37,7 +47,7 @@ const EmployeesList = () => {
     };
 
     if (!employees.length) {
-        return <EmptyListEmployees />;
+        return <EmptyListEmployees totalEmployees={totalEmployees} />;
     }
 
     const elements = employees.map((employee) => (

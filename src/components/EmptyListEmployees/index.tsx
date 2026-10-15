@@ -2,9 +2,13 @@ import { Users, SearchX } from 'lucide-react';
 
 import './EmptyListEmployees.scss';
 
-const EmptyListEmployees = () => {
+interface EmptyListEmployeesProps {
+    totalEmployees: number;
+}
 
-    const isEmpty = false;
+const EmptyListEmployees = ({ totalEmployees }: EmptyListEmployeesProps) => {
+
+    const isEmpty = !totalEmployees;
 
     const icon = isEmpty ? <Users size={48} strokeWidth={1.8} /> : <SearchX size={48} strokeWidth={1.8} />;
     const title = isEmpty ? 'Пока нет сотрудников' : 'Ничего не найдено';

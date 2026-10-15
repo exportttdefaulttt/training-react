@@ -27,6 +27,7 @@ const EmployeeTextField = ({ label, name, type, value, error, readOnly, onChange
                 value={value}
                 readOnly={readOnly}
                 onChange={onChange}
+                className={error ? 'input-error' : undefined}
             />
 
             {error && (

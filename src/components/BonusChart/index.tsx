@@ -1,8 +1,11 @@
+import { useAppSelector } from '@/store/hooks';
+import { selectBonusEmployeesPercentage } from '@/store/slices/employeesSlice';
+
 import './BonusChart.scss';
 
 const BonusChart = () => {
 
-    const percentage = 100;
+    const percentage = useAppSelector(selectBonusEmployeesPercentage);
 
     const radius = 70;
     const circumference = 2 * Math.PI * radius;

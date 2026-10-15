@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { Award, CalendarDays, History, Mail, Pencil, Star, Trash2 } from 'lucide-react';
 import clsx from 'clsx';
 import { formatMoney } from '@/utils/formatMoney';
+import { formatDate } from '@/utils/formatDate';
 
 import type { Employee, EmployeeId } from '@/shared/employee';
 import type { ToggleEmployeePayload } from '@/store/slices/employeesSlice';
@@ -62,7 +63,7 @@ const EmployeeCard = memo(({
                     <span className="meta-item">
                         <CalendarDays size={14} />
                         <span className="meta-text">
-                            {createdAt}
+                            {formatDate(createdAt)}
                         </span>
                     </span>
 
@@ -70,7 +71,7 @@ const EmployeeCard = memo(({
                         <span className="meta-item">
                             <History size={14} />
                             <span className="meta-text">
-                                {updatedAt}
+                                {formatDate(updatedAt)}
                             </span>
                         </span>
                     )}

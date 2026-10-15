@@ -1,5 +1,6 @@
 import {
     createContext,
+    useMemo,
     useCallback,
     useState,
     type ReactNode,
@@ -31,8 +32,13 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
         setToasts(toasts => toasts.filter(toast => toast.id !== id));
     }, []);
 
+    const value: ToastContextValue = useMemo(() => ({
+        showToast,
+        removeToast
+    }), []);
+
     return (
-        <ToastContext.Provider value={{ showToast, removeToast }}>
+        <ToastContext.Provider value={value}>
             {children}
 
             <div className="toast-container">
